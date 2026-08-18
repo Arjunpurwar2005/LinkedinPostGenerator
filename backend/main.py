@@ -19,9 +19,14 @@ allowed_origins = [
     "http://127.0.0.1:5173",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://postjun.netlify.app", # Explicitly allow your Netlify URL
 ]
 if frontend_url:
-    allowed_origins.append(frontend_url)
+    for url in frontend_url.split(","):
+        cleaned = url.strip().rstrip("/")
+        if cleaned:
+            allowed_origins.append(cleaned)
+            allowed_origins.append(f"{cleaned}/")
 
 app.add_middleware(
     CORSMiddleware,
