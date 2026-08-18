@@ -17,7 +17,7 @@ function Dashboard() {
     setHistoryLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://127.0.0.1:8000/history", {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/history`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -49,7 +49,7 @@ function Dashboard() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://127.0.0.1:8000/chat",
+        `${import.meta.env.VITE_API_URL}/chat`,
         {
           raw_input: topic,
         },
